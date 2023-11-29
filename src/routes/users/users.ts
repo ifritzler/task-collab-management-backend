@@ -1,7 +1,7 @@
 import express from "express";
 import { UserController } from "../../controllers/user.controller";
-import { UserService } from "../../services/users/user.service";
 import { UserMongoRepository } from "../../services/users/repository/UserMongoRepository.impl";
+import { UserService } from "../../services/users/user.service";
 import errorHandler from "./errorHandler";
 const router = express.Router();
 const userController = new UserController(new UserService(new UserMongoRepository()));

@@ -1,4 +1,4 @@
-import { User } from "../../../domain/User/User";
+import { User } from "../../../domain/User/User.entity";
 
 export class UserUpdateDto {
   updatedAt: number;

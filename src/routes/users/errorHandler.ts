@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
+import { BadRequestApiException, NotFoundApiException } from "../../common/ApiGenericErrors";
+import { DomainError } from "../../common/Errors";
 import {
   UserAlreadyExistsException,
   UserNotFoundException,
   UserValidationException,
-} from "../../services/users/exceptions";
-import { DomainError } from "../../common/Errors";
-import { BadRequestApiException, NotFoundApiException } from "../../common/ApiGenericErrors";
+} from "../../domain/User/User.exceptions";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler = (err: any, _req: Request, res: Response, next: NextFunction) => {

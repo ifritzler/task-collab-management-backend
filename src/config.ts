@@ -1,5 +1,5 @@
-import packageJson from "../package.json";
 import { ConnectOptions } from "mongoose";
+import packageJson from "../package.json";
 
 /**
  * Pattern for config is:

@@ -1,8 +1,8 @@
-import { User } from "../../../domain/User/User";
-import { UserModel } from "../../../domain/User/User.model";
+import { User } from "../../../domain/User/User.entity";
+import { UserNotFoundException, UserValidationException } from "../../../domain/User/User.exceptions";
+import { UserRepository } from "../../../domain/User/UserRepository";
+import { UserModel } from "../../mongoose/models/User.model";
 import { UserCreateDto } from "../dto/user.create.dto";
-import { UserRepository } from "./UserRepository";
-import { UserValidationException, UserNotFoundException } from "../exceptions";
 
 export class UserMongoRepository implements UserRepository {
   async create(data: UserCreateDto): Promise<User> {

@@ -1,6 +1,6 @@
-import { User } from "../../../domain/User/User";
-import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
+import { User } from "../../../domain/User/User.entity";
 
 export class UserCreateDto {
   uuid: string;

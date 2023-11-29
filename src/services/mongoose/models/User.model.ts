@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { v4 as uuid } from "uuid";
-import { User } from "./User";
+import { User } from "../../../domain/User/User.entity";
 
 const schema = new mongoose.Schema<User>({
   uuid: { type: "String", unique: true, index: true, default: uuid() },

@@ -1,5 +1,5 @@
-import { User } from "../../../domain/User/User";
 import { v4 as uuid } from "uuid";
+import { User } from "../../../domain/User/User.entity";
 
 export class UserResponseDto {
   uuid: string;

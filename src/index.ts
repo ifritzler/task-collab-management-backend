@@ -1,6 +1,6 @@
+import mongoose from "mongoose";
 import app from "./app";
 import config from "./config";
-import mongoose from "mongoose";
 
 // @ts-expect-error any
 mongoose.connect(config.database[config.nodeEnv].uri, config.database[config.nodeEnv].config).then(

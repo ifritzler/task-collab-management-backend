@@ -1,10 +1,8 @@
-import { NextFunction } from "express";
-import { Response } from "express";
-import { Request } from "express";
-import { UserService } from "../services/users/user.service";
+import { NextFunction, Request, Response } from "express";
 import { UserCreateDto } from "../services/users/dto/user.create.dto";
 import { UserResponseDto } from "../services/users/dto/user.response.dto";
 import { UserUpdateDto } from "../services/users/dto/user.update.dto";
+import { UserService } from "../services/users/user.service";
 
 export class UserController {
   constructor(private readonly userService: UserService) {}
