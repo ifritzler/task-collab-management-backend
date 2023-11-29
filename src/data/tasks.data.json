@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "uuid": "task-uuid-1",
+    "title": "Task 1",
+    "createdAt": 1638216000000,
+    "expiredAt": 1638302400000,
+    "tags": [
+      {
+        "id": 1,
+        "uuid": "abcdef123456",
+        "hexBackground": "#3498db",
+        "hexColor": "#ffffff",
+        "title": "Blue Tag"
+      }
+    ],
+    "owner": {
+      "id": 1,
+      "uuid": "user-uuid-1",
+      "name": "John",
+      "surname": "Doe",
+      "email": "john.doe@example.com",
+      "active": true,
+      "profilePic": "path/to/profile-pic-1.jpg",
+      "createdAt": 1638216000000,
+      "updatedAt": 1638292400000
+    },
+    "collabs": null,
+    "state": "pending"
+  },
+  {
+    "id": 2,
+    "uuid": "task-uuid-2",
+    "title": "Task 2",
+    "createdAt": 1638292400000,
+    "expiredAt": 1638378800000,
+    "tags": [
+      {
+        "id": 3,
+        "uuid": "mnopqr345678",
+        "hexBackground": "#2ecc71",
+        "hexColor": "#ffffff",
+        "title": "Green Tag"
+      }
+    ],
+    "owner": {
+      "id": 1,
+      "uuid": "user-uuid-1",
+      "name": "John",
+      "surname": "Doe",
+      "email": "john.doe@example.com",
+      "active": true,
+      "profilePic": "path/to/profile-pic-1.jpg",
+      "createdAt": 1638216000000,
+      "updatedAt": 1638292400000
+    },
+    "collabs": null,
+    "state": "finished"
+  },
+  {
+    "id": 3,
+    "uuid": "task-uuid-3",
+    "title": "Task 3",
+    "createdAt": 1638378800000,
+    "expiredAt": 1638465200000,
+    "tags": [
+      {
+        "id": 3,
+        "uuid": "mnopqr345678",
+        "hexBackground": "#2ecc71",
+        "hexColor": "#ffffff",
+        "title": "Green Tag"
+      }
+    ],
+    "owner": {
+      "id": 1,
+      "uuid": "user-uuid-1",
+      "name": "John",
+      "surname": "Doe",
+      "email": "john.doe@example.com",
+      "active": true,
+      "profilePic": "path/to/profile-pic-1.jpg",
+      "createdAt": 1638216000000,
+      "updatedAt": 1638292400000
+    },
+    "collabs": null,
+    "state": "pending"
+  },
+  {
+    "id": 4,
+    "uuid": "task-uuid-4",
+    "title": "Task 4",
+    "createdAt": 1638465200000,
+    "expiredAt": 1638551600000,
+    "tags": [
+      {
+        "id": 4,
+        "uuid": "stuvwx901234",
+        "hexBackground": "#f39c12",
+        "hexColor": "#ffffff",
+        "title": "Orange Tag"
+      }
+    ],
+    "owner": {
+      "id": 1,
+      "uuid": "user-uuid-1",
+      "name": "John",
+      "surname": "Doe",
+      "email": "john.doe@example.com",
+      "active": true,
+      "profilePic": "path/to/profile-pic-1.jpg",
+      "createdAt": 1638216000000,
+      "updatedAt": 1638292400000
+    },
+    "collabs": null,
+    "state": "finished"
+  }
+]

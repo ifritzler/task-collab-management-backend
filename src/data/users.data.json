@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "uuid": "user-uuid-1",
+    "name": "John",
+    "surname": "Doe",
+    "email": "john.doe@example.com",
+    "password": "1234",
+    "active": true,
+    "profilePic": "path/to/profile-pic-1.jpg",
+    "createdAt": 1638216000000,
+    "updatedAt": 1638292400000
+  },
+  {
+    "id": 2,
+    "uuid": "user-uuid-2",
+    "name": "Jane",
+    "surname": "Doe",
+    "email": "jane.doe@example.com",
+    "password": "1234",
+    "active": true,
+    "profilePic": "path/to/profile-pic-2.jpg",
+    "createdAt": 1638292400000,
+    "updatedAt": 1638378800000
+  }
+]

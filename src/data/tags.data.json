@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "uuid": "abcdef123456",
+    "hexBackground": "#3498db",
+    "hexColor": "#ffffff",
+    "title": "Blue Tag"
+  },
+  {
+    "id": 2,
+    "uuid": "ghijkl789012",
+    "hexBackground": "#e74c3c",
+    "hexColor": "#ffffff",
+    "title": "Red Tag"
+  },
+  {
+    "id": 3,
+    "uuid": "mnopqr345678",
+    "hexBackground": "#2ecc71",
+    "hexColor": "#ffffff",
+    "title": "Green Tag"
+  },
+  {
+    "id": 4,
+    "uuid": "stuvwx901234",
+    "hexBackground": "#f39c12",
+    "hexColor": "#ffffff",
+    "title": "Orange Tag"
+  }
+]
