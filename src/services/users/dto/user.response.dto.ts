@@ -9,7 +9,7 @@ export class UserResponseDto {
   profilePic: string;
   active: boolean;
   createdAt: number;
-  updatedAt: number;
+  updatedAt: number | null;
 
   private constructor(data: Omit<User, "id" | "password">) {
     this.name = data.name;
@@ -19,8 +19,8 @@ export class UserResponseDto {
 
     this.uuid = uuid();
     this.active = true;
-    this.createdAt = Date.now();
-    this.updatedAt = Date.now();
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
   }
 
   static fromUserEntity(user: User) {

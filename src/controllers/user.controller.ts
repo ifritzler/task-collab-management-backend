@@ -1,9 +1,12 @@
 import { NextFunction, Request, Response } from "express";
+import fs from "fs";
+import { promisify } from "util";
 import { UserCreateDto } from "../services/users/dto/user.create.dto";
 import { UserResponseDto } from "../services/users/dto/user.response.dto";
 import { UserUpdateDto } from "../services/users/dto/user.update.dto";
 import { UserService } from "../services/users/user.service";
 
+const unlink = promisify(fs.unlink);
 export class UserController {
   constructor(private readonly userService: UserService) {}
   findAllUsers = async (_req: Request, res: Response, next: NextFunction) => {
@@ -37,12 +40,28 @@ export class UserController {
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userCreateDto = new UserCreateDto(req.body);
+      let profilePicPath = "/profile/placeholder.png";
+      if (this.existProfilePic(req)) {
+        profilePicPath = `/profile/${userCreateDto.uuid}.${
+          // @ts-expect-error any
+          req.files.profilepic.name.split(".")[1]
+        }`;
+      }
+      userCreateDto.profilePic = profilePicPath;
       const user = await this.userService.create(userCreateDto);
+      if (this.existProfilePic(req)) {
+        // @ts-expect-error any
+        req.files.profilepic.mv(`./public${profilePicPath}`);
+      }
       const response = UserResponseDto.fromUserEntity(user);
       res.status(201).json({
         data: response,
       });
     } catch (error) {
+      if (this.existProfilePic(req)) {
+        // @ts-expect-error any
+        unlink(req.files.profilepic.tempFilePath);
+      }
       next(error);
     }
   };
@@ -80,4 +99,8 @@ export class UserController {
       next(error);
     }
   };
+
+  private existProfilePic(req: Request) {
+    return req.files && req.files.profilepic && !Array.isArray(req.files.profilepic);
+  }
 }

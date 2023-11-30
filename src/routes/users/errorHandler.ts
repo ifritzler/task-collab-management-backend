@@ -10,11 +10,12 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler = (err: any, _req: Request, res: Response, next: NextFunction) => {
   if (err instanceof DomainError && err instanceof UserAlreadyExistsException)
-    next(new BadRequestApiException(err.message));
+    return next(new BadRequestApiException(err.message));
   if (err instanceof DomainError && err instanceof UserValidationException)
-    next(new BadRequestApiException(err.message));
+    return next(new BadRequestApiException(err.message));
   if (err instanceof DomainError && err instanceof UserNotFoundException)
-    next(new NotFoundApiException(err.message));
+    return next(new NotFoundApiException(err.message));
+  next(err)
 };
 
 export default errorHandler;

@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import fileUpload from 'express-fileupload'
 
 import config from "./config";
 import errorHandler from "./middleware/errorHandler";
@@ -15,6 +16,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(fileUpload({
+  debug: config.nodeEnv === 'development',
+  useTempFiles: true,
+  tempFileDir: './tmp/',
+  abortOnLimit: true,
+  responseOnLimit: 'Upload image too large.',
+  createParentPath: true,
+}))
 
 app.use(
   cors({
