@@ -17,3 +17,9 @@ export class UserAlreadyExistsException extends DomainError {
     super(message);
   }
 }
+
+export class InvalidCredentialsException extends DomainError {
+  constructor(message: string = "Invalid Credentials.") {
+    super(message);
+  }
+}

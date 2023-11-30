@@ -8,4 +8,5 @@ export interface User {
   profilePic: string;
   createdAt: number;
   updatedAt: number | null;
+  refreshToken: string[];
 }

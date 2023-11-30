@@ -9,7 +9,7 @@ import { UserService } from "../services/users/user.service";
 const unlink = promisify(fs.unlink);
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  findAllUsers = async (_req: Request, res: Response, next: NextFunction) => {
+  findAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const users = await this.userService.getAll();
       res.status(200).json({

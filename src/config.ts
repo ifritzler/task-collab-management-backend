@@ -5,11 +5,11 @@ import packageJson from "../package.json";
  * Pattern for config is:
  * key: process.env['KEY'] ?? default
  */
-const config = {
+export const config = {
   version: packageJson.version,
   name: packageJson.name,
   description: packageJson.description,
-
+  cookieSecret: process.env.cookieSecret ?? "secret",
   nodeEnv: process.env["NODE_ENV"] ?? "development",
   port: process.env["PORT"] ?? 3000,
 
@@ -18,6 +18,9 @@ const config = {
     development: process.env["DEV_ORIGIN"] ?? "*",
     production: process.env["PROD_ORIGIN"] ?? "none",
   },
+
+  jwtTokenSecret: process.env["JWT_TOKEN_SECRET"] as string,
+  jwtRefreshSecret: process.env["JWT_TOKEN_REFRESH_SECRET"] as string,
 
   database: {
     test: {

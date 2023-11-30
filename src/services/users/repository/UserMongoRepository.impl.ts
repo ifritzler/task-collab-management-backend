@@ -1,10 +1,19 @@
 import { User } from "../../../domain/User/User.entity";
-import { UserNotFoundException, UserValidationException } from "../../../domain/User/User.exceptions";
+import {
+  UserNotFoundException,
+  UserValidationException,
+} from "../../../domain/User/User.exceptions";
 import { UserRepository } from "../../../domain/User/UserRepository";
 import { UserModel } from "../../mongoose/models/User.model";
 import { UserCreateDto } from "../dto/user.create.dto";
 
 export class UserMongoRepository implements UserRepository {
+  async findOneByCriteria(criteria: Partial<Pick<User, "email" | "uuid">>): Promise<User | null> {
+    const user = await UserModel.findOne<User>({ ...criteria });
+    if (!user) return null;
+    return user;
+  }
+
   async create(data: UserCreateDto): Promise<User> {
     const user = new UserModel(data);
     try {
@@ -30,9 +39,9 @@ export class UserMongoRepository implements UserRepository {
     await UserModel.updateOne({ uuid }, { active: false, updatedAt: Date.now() });
   }
 
-  async findById(uuid: string): Promise<User> {
+  async findById(uuid: string): Promise<User | null> {
     const user = await UserModel.findOne<User>({ uuid });
-    if (!user) throw new UserNotFoundException('User with id "' + uuid + '" not found.');
+    if (!user) return null;
     return user;
   }
 

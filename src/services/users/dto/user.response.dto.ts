@@ -11,7 +11,7 @@ export class UserResponseDto {
   createdAt: number;
   updatedAt: number | null;
 
-  private constructor(data: Omit<User, "id" | "password">) {
+  private constructor(data: Omit<User, "id" | "password" | "refreshToken">) {
     this.name = data.name;
     this.surname = data.surname;
     this.email = data.email;

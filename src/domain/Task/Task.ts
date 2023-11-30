@@ -7,6 +7,7 @@ export interface Task {
   id: number;
   uuid: string;
   title: string;
+  detail: string;
   createdAt: number;
   expiredAt: number;
   tags: Tag[];

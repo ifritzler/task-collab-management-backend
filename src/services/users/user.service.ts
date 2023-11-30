@@ -1,4 +1,5 @@
 import { User } from "../../domain/User/User.entity";
+import { UserNotFoundException } from "../../domain/User/User.exceptions";
 import { UserRepository } from "../../domain/User/UserRepository";
 import { UserCreateDto } from "./dto/user.create.dto";
 import { UserUpdateDto } from "./dto/user.update.dto";
@@ -27,6 +28,7 @@ export class UserService {
 
   async getById(uuid: string): Promise<User> {
     const user = await this.repository.findById(uuid);
+    if (!user) throw new UserNotFoundException();
     return user;
   }
 }

@@ -15,7 +15,7 @@ const errorHandler = (err: any, _req: Request, res: Response, next: NextFunction
     return next(new BadRequestApiException(err.message));
   if (err instanceof DomainError && err instanceof UserNotFoundException)
     return next(new NotFoundApiException(err.message));
-  next(err)
+  next(err);
 };
 
 export default errorHandler;

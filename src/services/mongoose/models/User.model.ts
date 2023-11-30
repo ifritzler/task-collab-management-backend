@@ -12,6 +12,7 @@ const schema = new mongoose.Schema<User>({
   active: { type: "Boolean", default: true },
   createdAt: { type: "Number", default: Date.now() },
   updatedAt: { type: "Number", default: null },
+  refreshToken: { type: [String], default: [] },
 });
 
 export const UserModel = mongoose.model("user", schema);
