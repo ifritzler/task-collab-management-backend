@@ -3,7 +3,7 @@ import { ForbiddenApiException } from "../common/ApiGenericErrors";
 import jwt from "jsonwebtoken";
 import config from "../config";
 
-export const isLoguedIn = (req: Request, res: Response, next: NextFunction) => {
+export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   try {
     const authorization = req.headers.authorization;
     if (!authorization) throw new ForbiddenApiException();
@@ -17,6 +17,7 @@ export const isLoguedIn = (req: Request, res: Response, next: NextFunction) => {
         id: verified.id,
         email: verified.email,
       };
+      req.roles = verified.roles;
     }
     next();
   } catch (e) {

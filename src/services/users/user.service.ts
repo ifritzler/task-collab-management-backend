@@ -31,4 +31,10 @@ export class UserService {
     if (!user) throw new UserNotFoundException();
     return user;
   }
+
+  async getByCriteria(criteria: Partial<User>): Promise<User> {
+    const user = await this.repository.findOneByCriteria(criteria);
+    if (!user) throw new UserNotFoundException();
+    return user;
+  }
 }

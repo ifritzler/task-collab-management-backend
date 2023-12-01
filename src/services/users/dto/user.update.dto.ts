@@ -1,4 +1,5 @@
 import { User } from "../../../domain/User/User.entity";
+import { Roles } from "../../../domain/User/types";
 
 export class UserUpdateDto {
   updatedAt: number;
@@ -7,9 +8,12 @@ export class UserUpdateDto {
   surname: string | undefined;
   profilePic: string | undefined;
   refreshToken: string[] | undefined;
+  roles: Roles[] | undefined;
 
   constructor(
-    data: Partial<Pick<User, "email" | "name" | "surname" | "profilePic" | "refreshToken">>,
+    data: Partial<
+      Pick<User, "email" | "name" | "surname" | "profilePic" | "refreshToken" | "roles">
+    >,
   ) {
     this.email = data.email;
     this.name = data.name;
@@ -17,6 +21,7 @@ export class UserUpdateDto {
     this.profilePic = data.profilePic;
     this.refreshToken = data.refreshToken;
     this.updatedAt = Date.now();
+    this.roles = data.roles;
   }
 
   build() {

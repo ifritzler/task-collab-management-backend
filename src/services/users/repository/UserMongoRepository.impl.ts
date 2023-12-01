@@ -46,7 +46,7 @@ export class UserMongoRepository implements UserRepository {
   }
 
   async findAll(): Promise<User[]> {
-    const query = await UserModel.find<User>({}, { password: 0, _id: 0 });
+    const query = await UserModel.find<User>({}, { password: 0, _id: 0, refreshToken: 0 });
     return query;
   }
 }

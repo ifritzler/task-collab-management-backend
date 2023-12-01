@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
 import { User } from "../../../domain/User/User.entity";
+import { Roles } from "../../../domain/User/types";
 
 export class UserCreateDto {
   uuid: string;
@@ -12,8 +13,11 @@ export class UserCreateDto {
   active: boolean;
   createdAt: number;
   updatedAt: number | null;
+  roles: Roles[];
 
-  constructor(data: Pick<User, "name" | "surname" | "email" | "password" | "profilePic">) {
+  constructor(
+    data: Pick<User, "name" | "surname" | "email" | "password" | "profilePic" | "roles">,
+  ) {
     this.name = data.name;
     this.surname = data.surname;
     this.email = data.email;
@@ -24,6 +28,7 @@ export class UserCreateDto {
     this.active = true;
     this.createdAt = Date.now();
     this.updatedAt = null;
+    this.roles = [Roles.User];
   }
 
   build() {

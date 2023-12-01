@@ -33,6 +33,7 @@ export class UserResponseDto {
       active: user.active,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      roles: user.roles,
     });
   }
 }

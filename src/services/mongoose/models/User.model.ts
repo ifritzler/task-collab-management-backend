@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { v4 as uuid } from "uuid";
 import { User } from "../../../domain/User/User.entity";
-
+import { Roles } from "../../../domain/User/types";
 const schema = new mongoose.Schema<User>({
   uuid: { type: "String", unique: true, index: true, default: uuid() },
   name: { type: "String", required: true },
@@ -12,6 +12,7 @@ const schema = new mongoose.Schema<User>({
   active: { type: "Boolean", default: true },
   createdAt: { type: "Number", default: Date.now() },
   updatedAt: { type: "Number", default: null },
+  roles: { type: [Number], default: [Roles.User] },
   refreshToken: { type: [String], default: [] },
 });
 

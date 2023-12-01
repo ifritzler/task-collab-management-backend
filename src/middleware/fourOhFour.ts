@@ -4,7 +4,7 @@ import { RequestHandler } from "express";
  * JSON 404 response
  */
 const fourOhFour: RequestHandler = (_req, res) => {
-  return res.status(404).json({ message: "not found" });
+  return res.status(404).json({ message: "Not Found" });
 };
 
 export default fourOhFour;

@@ -12,5 +12,5 @@
     "types": ["node", "jest", "express"]
   },
   "include": ["src/tests/**/*.ts"],
-  "files": ["types/types.d.ts","src/index.ts"]
+  "files": [ "src/types/express/index.d.ts", "src/index.ts", ]
 }
