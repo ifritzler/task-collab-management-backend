@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth/auth.service";
 import { AuthDto } from "../services/auth/dto/auth.dto";
 import { UserUpdateDto } from "../services/users/dto/user.update.dto";
 import { UserService } from "../services/users/user.service";
+import { User } from "../domain/User/User.entity";
 
 export class AuthController {
   constructor(
@@ -27,7 +28,7 @@ export class AuthController {
           roles: user.roles,
         },
         config.jwtTokenSecret,
-        { algorithm: "HS256", expiresIn: "10m" },
+        { algorithm: "HS256", expiresIn: "40s" },
       );
       const refreshToken = jwt.sign(
         {
@@ -36,9 +37,9 @@ export class AuthController {
           roles: user.roles,
         },
         config.jwtRefreshSecret,
-        { algorithm: "HS256", expiresIn: "3 days" },
+        { algorithm: "HS256", expiresIn: "3m" },
       );
-      res.cookie("jwt", refreshToken, { httpOnly: true, sameSite: "none" });
+      res.cookie("jwt", refreshToken, { httpOnly: true, maxAge: 3 * 60 * 1000, signed: true });
 
       return res.status(200).json({
         accessToken,
@@ -51,7 +52,7 @@ export class AuthController {
   logout = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const refreshToken = req.cookies.jwt;
-      res.clearCookie("jwt", { httpOnly: true, sameSite: "none" });
+      res.clearCookie("jwt");
       if (refreshToken) {
         const decoded = jwt.decode(refreshToken, { json: true });
         if (!decoded) return res.status(204).send();
@@ -73,15 +74,15 @@ export class AuthController {
 
   refreshToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const refreshTokenCookieValue = req.cookies.jwt;
-      if (!refreshTokenCookieValue) throw new UnauthorizedApiException();
+      const refreshTokenCookieValue = req.signedCookies.jwt;
+      if (!refreshTokenCookieValue) throw new ForbiddenApiException();
 
-      res.clearCookie("jwt", { httpOnly: true, sameSite: "none" });
+      res.clearCookie("jwt", { httpOnly: true, maxAge: 3 * 60 * 1000, signed: true });
 
       const verified = jwt.verify(refreshTokenCookieValue, config.jwtRefreshSecret, {
         algorithms: ["HS256"],
       });
-      let user = null;
+      let user: User | null = null;
       if (typeof verified !== "string") {
         user = await this.userService.getById(verified.id);
       }
@@ -99,20 +100,20 @@ export class AuthController {
       };
       const accessToken = jwt.sign(payload, config.jwtTokenSecret, {
         algorithm: "HS256",
-        expiresIn: "10m",
+        expiresIn: "40s",
       });
       const newRefreshToken = jwt.sign(payload, config.jwtRefreshSecret, {
         algorithm: "HS256",
-        expiresIn: "3 days",
+        expiresIn: "3m",
       });
-      res.cookie("jwt", newRefreshToken, { httpOnly: true, sameSite: "none" });
+      res.cookie("jwt", newRefreshToken, { httpOnly: true, maxAge: 3 * 60 * 1000, signed: true });
       return res.status(200).json({ accessToken });
     } catch (e) {
       if (e instanceof TokenExpiredError) {
-        return next(new UnauthorizedApiException("Authentication Token expired"));
+        return next(new ForbiddenApiException("Forbidden - Authentication Token expired"));
       }
       if (e instanceof JsonWebTokenError) {
-        return next(new UnauthorizedApiException("Authentication Token expired"));
+        return next(new UnauthorizedApiException("Unauthorized - Malformed Token"));
       }
       next(e);
     }

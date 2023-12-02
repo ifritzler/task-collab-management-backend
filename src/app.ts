@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(config.cookieSecret));
 app.use(
   fileUpload({
-    debug: config.nodeEnv === "development",
+    debug: false,
     useTempFiles: true,
     tempFileDir: "./tmp/",
     abortOnLimit: true,
@@ -31,11 +31,13 @@ app.use(
   cors({
     // @ts-expect-error any
     origin: config.clientCorsOrigins[config.nodeEnv] ?? "*",
+    credentials: true,
+    preflightContinue: true
   }),
 );
 
 app.use(helmet());
-app.use(morgan("tiny"));
+app.use(morgan("combined"));
 
 // Apply routes before error handling
 app.use("/api", root);

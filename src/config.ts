@@ -9,7 +9,7 @@ export const config = {
   version: packageJson.version,
   name: packageJson.name,
   description: packageJson.description,
-  cookieSecret: process.env.cookieSecret ?? "secret",
+  cookieSecret: process.env['COOKIE_SECRET'] ?? "secret",
   nodeEnv: process.env["NODE_ENV"] ?? "development",
   port: process.env["PORT"] ?? 3000,
 
